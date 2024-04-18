@@ -28,7 +28,8 @@ public class Student extends PanacheEntity {
         this.name = name;
         this.surname = surname;
     }
-    public String getInfo(){
+
+    public String getInfo() {
         return name + " " + surname;
     }
 }

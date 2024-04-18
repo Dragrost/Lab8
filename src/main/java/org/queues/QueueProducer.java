@@ -22,12 +22,12 @@ public class QueueProducer {
     Emitter<String> emitter;
 
     @Incoming("responseQueue")
-    public void Listener(JsonObject jsonObject){
+    public void Listener(JsonObject jsonObject) {
         System.out.println("Принял запрос, обрабатываю: " + jsonObject);
         JsonParser parser = new JsonParser();
-        JsonElement mJson =  parser.parse(jsonObject.toString());
+        JsonElement mJson = parser.parse(jsonObject.toString());
         Gson gson = new Gson();
-        student = gson.fromJson(mJson,Student.class);
+        student = gson.fromJson(mJson, Student.class);
     }
 
     @POST

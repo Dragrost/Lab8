@@ -12,18 +12,20 @@ import java.util.List;
 public class RequestsController {
     Student stud;
     List<Student> listStudents = new ArrayList<>();
-    public RequestsController(){
-        stud = new Student("Tolya","Kolya");
+
+    public RequestsController() {
+        stud = new Student("Tolya", "Kolya");
         listStudents.add(stud);
-        stud = new Student("Mew","Maw");
+        stud = new Student("Mew", "Maw");
         listStudents.add(stud);
     }
+
     /**
      * Обычный get запрос
      */
     @GET
     @Path("/hello")
-    public String print(){
+    public String print() {
         return "Hello!";
     }
 
@@ -34,8 +36,7 @@ public class RequestsController {
     @Path("/json")
     @Produces(MediaType.APPLICATION_JSON)
     public Student printJSON() {
-        Student student = new Student("Andrew","Black");
-        return student;
+        return new Student("Andrew", "Black");
     }
 
     /**
@@ -55,7 +56,7 @@ public class RequestsController {
     @Path("/getQuery/")
     @Produces(MediaType.APPLICATION_JSON)
     public Student helloQuery(@QueryParam("name") String name, @QueryParam("surname") String surname) {
-        return new Student(name,surname);
+        return new Student(name, surname);
     }
 
     /**
@@ -77,7 +78,7 @@ public class RequestsController {
     @Path("/getList")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Student> getListClass(Student getStud) {
-        return Arrays.asList(getStud,new Student("Tolya","Smirnov"));
+        return Arrays.asList(getStud, new Student("Tolya", "Smirnov"));
     }
 
     /**
@@ -86,8 +87,8 @@ public class RequestsController {
     @POST
     @Path("/getClassList")
     @Produces(MediaType.APPLICATION_JSON)
-    public Student getClassFromListClass(List<Student> getStud) {
-        return getStud.get(0);
+    public Student getClassFromListClass(List<Student> listStudents) {
+        return listStudents.get(0);
     }
 
     /**
@@ -118,10 +119,7 @@ public class RequestsController {
     @Path("/getINMEMORYDel")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Student> delINMemory(@QueryParam("name") String name) {
-        for (int i = 0; i < listStudents.size();i++) {
-            if (listStudents.get(i).getName().equals(name))
-                listStudents.remove(i);
-        }
+        listStudents.removeIf(student -> student.getName().equals(name));
         return listStudents;
     }
 

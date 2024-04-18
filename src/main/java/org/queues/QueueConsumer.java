@@ -13,10 +13,10 @@ public class QueueConsumer {
     Emitter<Student> emitter;
 
     @Incoming("requestIncomingQueue")
-    public void Listener(String msg){
+    public void Listener(String msg) {
         System.out.println("Получил " + msg);
         if (msg.equals("getClass"))
-            student = new Student("Ivan","Ivanov");
+            student = new Student("Ivan", "Ivanov");
         emitter.send(student);
     }
 }
