@@ -1,8 +1,6 @@
 package org.queues;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.POST;
@@ -14,6 +12,8 @@ import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 
+import java.io.IOException;
+
 @ApplicationScoped
 @Path("/")
 public class QueueProducer {
@@ -24,10 +24,11 @@ public class QueueProducer {
     @Incoming("responseQueue")
     public void Listener(JsonObject jsonObject) {
         System.out.println("Принял запрос, обрабатываю: " + jsonObject);
-        JsonParser parser = new JsonParser();
-        JsonElement mJson = parser.parse(jsonObject.toString());
-        Gson gson = new Gson();
-        student = gson.fromJson(mJson, Student.class);
+        try {
+            student = new ObjectMapper().readValue(jsonObject.toString(), Student.class);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @POST

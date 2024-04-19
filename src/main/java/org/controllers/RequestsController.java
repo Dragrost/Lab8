@@ -107,7 +107,7 @@ public class RequestsController {
     @PUT
     @Path("/getINMEMORYPut")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> putINMemory(Student student) {
+    public List<Student> putInMemory(Student student) {
         listStudents.add(student);
         return listStudents;
     }
@@ -118,7 +118,7 @@ public class RequestsController {
     @DELETE
     @Path("/getINMEMORYDel")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Student> delINMemory(@QueryParam("name") String name) {
+    public List<Student> delInMemory(@QueryParam("name") String name) {
         listStudents.removeIf(student -> student.getName().equals(name));
         return listStudents;
     }
