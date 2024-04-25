@@ -1,5 +1,7 @@
 package org.controllers;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.dataBaseClass.Student;
@@ -7,7 +9,6 @@ import org.dataBaseClass.Student;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 @Path("/request")
 public class RequestsController {
     Student stud;
@@ -35,6 +36,8 @@ public class RequestsController {
     @GET
     @Path("/json")
     @Produces(MediaType.APPLICATION_JSON)
+    @Counted(value = "counted.method", extraTags = { "extra", "annotated" })
+    @Timed(value = "call", extraTags = {"region", "test"})
     public Student printJSON() {
         return new Student("Andrew", "Black");
     }

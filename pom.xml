@@ -30,6 +30,7 @@
     </dependencyManagement>
 
     <dependencies>
+
         <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-hibernate-orm-panache -->
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -72,6 +73,18 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
             <scope>compile</scope>
+        </dependency>
+        <!--<dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-metrics</artifactId>
+        </dependency> -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-micrometer</artifactId>
         </dependency>
     </dependencies>
 
