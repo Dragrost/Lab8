@@ -30,7 +30,10 @@
     </dependencyManagement>
 
     <dependencies>
-
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-logging-gelf</artifactId>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-hibernate-orm-panache -->
         <dependency>
             <groupId>io.quarkus</groupId>

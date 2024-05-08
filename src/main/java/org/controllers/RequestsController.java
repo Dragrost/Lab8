@@ -2,15 +2,20 @@ package org.controllers;
 
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.dataBaseClass.Student;
+import org.jboss.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+@ApplicationScoped
 @Path("/request")
 public class RequestsController {
+    private static final Logger LOG = Logger.getLogger(RequestsController.class);
     Student stud;
     List<Student> listStudents = new ArrayList<>();
 
@@ -27,6 +32,7 @@ public class RequestsController {
     @GET
     @Path("/hello")
     public String print() {
+        LOG.info("Отображение Hello");
         return "Hello!";
     }
 
@@ -36,9 +42,10 @@ public class RequestsController {
     @GET
     @Path("/json")
     @Produces(MediaType.APPLICATION_JSON)
-    @Counted(value = "counted.method", extraTags = { "extra", "annotated" })
+    @Counted(value = "counted.method", extraTags = {"extra", "annotated"})
     @Timed(value = "call", extraTags = {"region", "test"})
     public Student printJSON() {
+        LOG.info("Отображение Andrew Black");
         return new Student("Andrew", "Black");
     }
 
